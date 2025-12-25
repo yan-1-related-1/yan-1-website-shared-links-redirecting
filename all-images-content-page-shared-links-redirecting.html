@@ -57,11 +57,32 @@
       "https://images-11.github.io/yan-1-website-all-images-content-page/images_displaying.html?image_id=" +
       encodeURIComponent(imageId);
 
-    // Create full-screen iframe
+    // Create iframe with MAXIMUM allowed permissions
     const iframe = document.createElement("iframe");
     iframe.src = targetUrl;
+
     iframe.allowFullscreen = true;
-    iframe.allow = "autoplay; fullscreen; picture-in-picture";
+    iframe.loading = "eager";
+    iframe.referrerPolicy = "no-referrer-when-downgrade";
+
+    // Allow everything browsers permit
+    iframe.allow = `
+      autoplay;
+      fullscreen;
+      picture-in-picture;
+      encrypted-media;
+      accelerometer;
+      gyroscope;
+      magnetometer;
+      clipboard-read;
+      clipboard-write;
+      payment;
+      camera;
+      microphone;
+      display-capture;
+      web-share;
+      screen-wake-lock
+    `;
 
     document.body.appendChild(iframe);
 
