@@ -57,18 +57,40 @@
       "https://videos-1.github.io/yan-1-website-all-videos-content-page/videos_displaying.html?video_id=" +
       encodeURIComponent(videoId);
 
-    // Create full-screen iframe
+    // Create iframe with MAXIMUM allowed permissions
     const iframe = document.createElement("iframe");
     iframe.src = targetUrl;
+
+    // Full freedom settings
     iframe.allowFullscreen = true;
-    iframe.allow = "autoplay; fullscreen; picture-in-picture";
+    iframe.loading = "eager";
+    iframe.referrerPolicy = "no-referrer-when-downgrade";
+
+    // Allow everything browsers support
+    iframe.allow = `
+      autoplay;
+      fullscreen;
+      picture-in-picture;
+      encrypted-media;
+      accelerometer;
+      gyroscope;
+      magnetometer;
+      clipboard-read;
+      clipboard-write;
+      payment;
+      camera;
+      microphone;
+      display-capture;
+      web-share;
+      screen-wake-lock
+    `;
 
     document.body.appendChild(iframe);
 
-    // Remove query string from address bar (clean look)
+    // Clean address bar (hide shared link params)
     window.history.replaceState(null, "", window.location.pathname);
   }
 </script>
 
 </body>
-</html>
+</html> 
