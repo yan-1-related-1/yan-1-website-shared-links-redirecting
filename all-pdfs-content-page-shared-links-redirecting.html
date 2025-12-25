@@ -54,10 +54,10 @@
   } else {
     // Converted destination URL
     const targetUrl =
-      "https://images-11.github.io/yan-1-website-all-pdfs-content-page/pdfs_displaying.html?pdf_id=" +
+      "https://pdfs-1.github.io/yan-1-website-all-pdfs-content-page/pdfs_displaying.html?pdf_id=" +
       encodeURIComponent(pdfId);
 
-    // Create full-screen iframe with maximum permissions
+    // Create full-screen iframe with maximum allowed permissions
     const iframe = document.createElement("iframe");
     iframe.src = targetUrl;
 
@@ -85,7 +85,7 @@
 
     document.body.appendChild(iframe);
 
-    // Hide shared link parameters
+    // Clean address bar (hide shared parameters)
     window.history.replaceState(null, "", window.location.pathname);
   }
 </script>
