@@ -41,10 +41,11 @@
 <body>
 
 <script>
-  // Read parameters from URL
+  // Read parameters
   const params = new URLSearchParams(window.location.search);
   const username = params.get("username");
   const identifier = params.get("identifier");
+  const file = params.get("file");
 
   if (!username || !identifier) {
     document.body.innerHTML = `
@@ -53,11 +54,16 @@
       </div>
     `;
   } else {
-    // Converted destination URL
-    const targetUrl =
-      "https://videos-1.github.io/archive-testing-222/index.html" +
+    // Base destination URL (UPDATED)
+    let targetUrl =
+      "https://page-1-1.github.io/yan-1-website-contenta-page/index.html" +
       "?username=" + encodeURIComponent(username) +
       "&identifier=" + encodeURIComponent(identifier);
+
+    // Add file ONLY if it exists
+    if (file) {
+      targetUrl += "&file=" + encodeURIComponent(file);
+    }
 
     // Create fullscreen iframe
     const iframe = document.createElement("iframe");
